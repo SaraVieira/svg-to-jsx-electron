@@ -12,7 +12,11 @@ function App() {
         <h2>
           Get in SVG files and you can get out SVG code ready for your React APP
         </h2>
-        <h3>Please control+click to able to open</h3>
+        {navigator.platform === "MacIntel" ? (
+          <h3>Please control+click to able to open</h3>
+        ) : (
+          <h3>Only available on macosx :(</h3>
+        )}
         {navigator.platform === "MacIntel" ? (
           <>
             <a
