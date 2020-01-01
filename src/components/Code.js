@@ -51,7 +51,9 @@ export default ({ code, filename, jsx }) => {
   const save = () => {
     dialog
       .showSaveDialog(null, {
-        defaultPath: `${filename.split(".")[0]}.${jsx ? "jsx" : "js"}`
+        defaultPath: `${filename ? filename.split(".")[0] : "icon"}.${
+          jsx ? "jsx" : "js"
+        }`
       })
       .then(({ filePath }) => {
         if (filePath === undefined) {

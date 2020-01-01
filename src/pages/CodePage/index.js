@@ -16,7 +16,13 @@ import { StyledForm, Submit } from "./elements"
 export default () => {
   const [jsCode, setJSCode] = useState()
   const form = useFormState({
-    values: { svgCode: "", native: false, name: "Icon", icon: false },
+    values: {
+      svgCode: "",
+      native: false,
+      name: "Icon",
+      icon: false,
+      jsx: false
+    },
     onValidate: values => {
       if (!values.svgCode) {
         const errors = {
@@ -51,6 +57,10 @@ export default () => {
         <label>
           <FormCheckbox {...form} name="native" value="native" /> React Native
         </label>
+        <label>
+          <FormCheckbox {...form} name="jsx" value="jsx" /> Use JSX extension
+          for saving
+        </label>
         <FormLabel {...form} name="svgCode">
           SVG Code
         </FormLabel>
@@ -63,7 +73,13 @@ export default () => {
         <FormMessage {...form} name="svgCode" />
         <Submit {...form}>Submit</Submit>
       </StyledForm>
-      {jsCode ? <Code code={jsCode}> </Code> : null}
+      {jsCode ? (
+        <Code
+          filename={form.values.name}
+          jsx={form.values.jsx}
+          code={jsCode}
+        ></Code>
+      ) : null}
     </>
   )
 }
