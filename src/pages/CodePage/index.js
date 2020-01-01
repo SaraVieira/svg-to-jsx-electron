@@ -1,43 +1,43 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import svgr from "@svgr/core";
-import Code from "../../components/Code";
-import prettier from "prettier";
-import svgo from "../../utils/svgo";
+import svgr from "@svgr/core"
+import Code from "../../components/Code"
+import prettier from "prettier"
+import svgo from "../../utils/svgo"
 import {
   unstable_FormCheckbox as FormCheckbox,
   unstable_useFormState as useFormState,
   unstable_FormLabel as FormLabel,
   unstable_FormInput as FormInput,
   unstable_FormMessage as FormMessage
-} from "reakit/Form";
-import { StyledForm, Submit } from "./elements";
+} from "reakit/Form"
+import { StyledForm, Submit } from "./elements"
 
 export default () => {
-  const [jsCode, setJSCode] = useState();
+  const [jsCode, setJSCode] = useState()
   const form = useFormState({
     values: { svgCode: "", native: false, name: "Icon", icon: false },
     onValidate: values => {
       if (!values.svgCode) {
         const errors = {
           svgCode: "You need to paste some SVG code"
-        };
-        throw errors;
+        }
+        throw errors
       }
     },
     onSubmit: async values => {
-      const svgoCode = await svgo(values.svgCode);
+      const svgoCode = await svgo(values.svgCode)
       svgr(svgoCode, values, { componentName: values.name }).then(
         async code => {
           setJSCode(
             prettier.format(code, {
               parser: "babel"
             })
-          );
+          )
         }
-      );
+      )
     }
-  });
+  })
   return (
     <>
       <StyledForm {...form}>
@@ -65,5 +65,5 @@ export default () => {
       </StyledForm>
       {jsCode ? <Code code={jsCode}> </Code> : null}
     </>
-  );
-};
+  )
+}

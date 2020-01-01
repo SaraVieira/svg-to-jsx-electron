@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import nightOwl from "prism-react-renderer/themes/nightOwl";
-import styled, { css } from "styled-components";
-import CopyIcon from "../icons/CopyIcon";
-import DownloadIcon from "../icons/DownloadIcon";
-import copy from "copy-to-clipboard";
-import { remote } from "electron";
-import { Tooltip, TooltipReference, useTooltipState } from "reakit/Tooltip";
+import React, { useState } from "react"
+import Highlight, { defaultProps } from "prism-react-renderer"
+import nightOwl from "prism-react-renderer/themes/nightOwl"
+import styled, { css } from "styled-components"
+import CopyIcon from "../icons/CopyIcon"
+import DownloadIcon from "../icons/DownloadIcon"
+import copy from "copy-to-clipboard"
+import { remote } from "electron"
+import { Tooltip, TooltipReference, useTooltipState } from "reakit/Tooltip"
 
-const { dialog } = remote;
-const fs = require("fs");
+const { dialog } = remote
+const fs = require("fs")
 
 const Icon = styled(CopyIcon)`
   width: 20px;
@@ -28,7 +28,7 @@ const Icon = styled(CopyIcon)`
   &:hover {
     fill: #7cc77c;
   }
-`;
+`
 
 const Download = styled(DownloadIcon)`
   width: 20px;
@@ -41,12 +41,12 @@ const Download = styled(DownloadIcon)`
   &:hover {
     fill: #7cc77c;
   }
-`;
+`
 
 export default ({ code, filename, jsx }) => {
-  const copyTooltip = useTooltipState({ placement: "top-end" });
-  const downloadTooltip = useTooltipState({ placement: "top-end" });
-  const [copied, setCopied] = useState(false);
+  const copyTooltip = useTooltipState({ placement: "top-end" })
+  const downloadTooltip = useTooltipState({ placement: "top-end" })
+  const [copied, setCopied] = useState(false)
 
   const save = () => {
     dialog
@@ -55,14 +55,15 @@ export default ({ code, filename, jsx }) => {
       })
       .then(({ filePath }) => {
         if (filePath === undefined) {
-          return;
+          return
         }
 
         fs.writeFile(filePath, code, err => {
-          if (err) return console.error(err);
-        });
-      });
-  };
+          // eslint-disable-next-line
+          if (err) return console.error(err)
+        })
+      })
+  }
 
   return (
     <Highlight {...defaultProps} theme={nightOwl} code={code} language="jsx">
@@ -79,12 +80,12 @@ export default ({ code, filename, jsx }) => {
             <Icon
               copied={copied}
               onClick={() => {
-                copy(code, { message: "Click to copy to clipboard" });
-                setCopied(true);
+                copy(code, { message: "Click to copy to clipboard" })
+                setCopied(true)
 
                 window.setTimeout(() => {
-                  setCopied(false);
-                }, 1000);
+                  setCopied(false)
+                }, 1000)
               }}
             />
           </TooltipReference>
@@ -107,5 +108,5 @@ export default ({ code, filename, jsx }) => {
         </pre>
       )}
     </Highlight>
-  );
-};
+  )
+}

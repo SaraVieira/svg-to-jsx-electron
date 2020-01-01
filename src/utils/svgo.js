@@ -1,4 +1,4 @@
-import SVGO from 'svgo'
+import SVGO from "svgo"
 
 const svgo = new SVGO({
   full: true,

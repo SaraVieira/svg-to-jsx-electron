@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from "styled-components"
 import {
   unstable_Form as Form,
   unstable_FormSubmitButton as FormSubmitButton
-} from "reakit/Form";
+} from "reakit/Form"
 
 export const StyledForm = styled(Form)`
   display: flex;
@@ -21,7 +21,7 @@ export const StyledForm = styled(Form)`
     padding: 8px;
     margin-bottom: 20px;
   }
-`;
+`
 
 export const Submit = styled(FormSubmitButton)`
   padding: 8px 12px;
@@ -34,4 +34,4 @@ export const Submit = styled(FormSubmitButton)`
   border-radius: 4px;
   width: 100%;
   text-transform: uppercase;
-`;
+`

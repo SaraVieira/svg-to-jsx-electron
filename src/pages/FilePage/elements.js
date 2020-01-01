@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { unstable_Form as Form } from "reakit/Form";
+import styled from "styled-components"
+import { unstable_Form as Form } from "reakit/Form"
 
 export const StyledForm = styled(Form)`
   display: flex;
@@ -18,7 +18,7 @@ export const StyledForm = styled(Form)`
     padding: 8px;
     margin-bottom: 20px;
   }
-`;
+`
 
 export const DropzoneContainer = styled.div`
   flex: 1;
@@ -31,8 +31,8 @@ export const DropzoneContainer = styled.div`
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
-`;
+`
 
 export const CodeWrapper = styled.div`
   margin-top: 20px;
-`;
+`

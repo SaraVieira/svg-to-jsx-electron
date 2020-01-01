@@ -1,9 +1,10 @@
-'use strict'
+"use strict"
 
 // Import parts of electron to use
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
-const url = require('url')
+const { app, BrowserWindow } = require("electron")
+const path = require("path")
+const url = require("url")
+require("update-electron-app")()
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -22,22 +23,22 @@ if (
 
 // Temporary fix broken high-dpi scale factor on Windows (125% scaling)
 // info: https://github.com/electron/electron/issues/9691
-if (process.platform === 'win32') {
-  app.commandLine.appendSwitch('high-dpi-support', 'true')
-  app.commandLine.appendSwitch('force-device-scale-factor', '1')
+if (process.platform === "win32") {
+  app.commandLine.appendSwitch("high-dpi-support", "true")
+  app.commandLine.appendSwitch("force-device-scale-factor", "1")
 }
 
 function createWindow() {
-  app.dock.setIcon(path.join(__dirname, 'icons/png/128x128.png'))
+  app.dock.setIcon(path.join(__dirname, "icons/png/128x128.png"))
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    titleBarStyle: 'hidden',
-    title: 'SVG to JSX',
+    titleBarStyle: "hidden",
+    title: "SVG to JSX",
     width: 1024,
     height: 768,
     show: false,
     movable: true,
-    icon: path.join(__dirname, '/icons/mac/app.icns'),
+    icon: path.join(__dirname, "/icons/mac/app.icns"),
     webPreferences: {
       nodeIntegration: true
     }
@@ -46,23 +47,23 @@ function createWindow() {
   // and load the index.html of the app.
   let indexPath
 
-  if (dev && process.argv.indexOf('--noDevServer') === -1) {
+  if (dev && process.argv.indexOf("--noDevServer") === -1) {
     indexPath = url.format({
-      protocol: 'http:',
-      host: 'localhost:8080',
-      pathname: 'index.html',
+      protocol: "http:",
+      host: "localhost:8080",
+      pathname: "index.html",
       slashes: true
     })
   } else {
     indexPath = url.format({
-      protocol: 'file:',
-      pathname: path.join(__dirname, 'dist', 'index.html'),
+      protocol: "file:",
+      pathname: path.join(__dirname, "dist", "index.html"),
       slashes: true
     })
   }
 
   mainWindow.loadURL(indexPath)
-  mainWindow.once('ready-to-show', () => {
+  mainWindow.once("ready-to-show", () => {
     mainWindow.show()
 
     // Open the DevTools automatically if developing
@@ -72,7 +73,7 @@ function createWindow() {
   })
 
   // Emitted when the window is closed.
-  mainWindow.on('closed', function() {
+  mainWindow.on("closed", function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
@@ -83,18 +84,18 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on("ready", createWindow)
 
 // Quit when all windows are closed.
-app.on('window-all-closed', () => {
+app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+  if (process.platform !== "darwin") {
     app.quit()
   }
 })
 
-app.on('activate', () => {
+app.on("activate", () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {

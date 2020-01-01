@@ -1,11 +1,11 @@
-import React from "react";
-import { useTabState, TabList, TabPanel } from "reakit/Tab";
-import CodePage from "../pages/CodePage";
-import FilePage from "../pages/FilePage";
-import { Styles, TabButton } from "../utils/style";
+import React from "react"
+import { useTabState, TabList, TabPanel } from "reakit/Tab"
+import CodePage from "../pages/CodePage"
+import FilePage from "../pages/FilePage"
+import { Styles, TabButton } from "../utils/style"
 
 const App = () => {
-  const tab = useTabState({ selectedId: "code" });
+  const tab = useTabState({ selectedId: "code" })
   return (
     <>
       <TabList {...tab} aria-label="My tabs">
@@ -23,12 +23,14 @@ const App = () => {
         <FilePage />
       </TabPanel>
     </>
-  );
-};
+  )
+}
 
-export default () => (
+const StyledApp = () => (
   <>
     <Styles />
     <App />
   </>
-);
+)
+
+export default StyledApp

@@ -1,5 +1,5 @@
-import { Tab } from "reakit/Tab";
-import styled, { createGlobalStyle } from "styled-components";
+import { Tab } from "reakit/Tab"
+import styled, { createGlobalStyle } from "styled-components"
 
 export const Styles = createGlobalStyle`
   html, body {
@@ -30,7 +30,7 @@ export const Styles = createGlobalStyle`
   div[role="tabpanel"] {
     outline: none;
   }
-`;
+`
 
 export const TabButton = styled(Tab)`
   padding: 8px 12px;
@@ -54,4 +54,4 @@ export const TabButton = styled(Tab)`
   .titlebar-button {
     -webkit-app-region: no-drag;
   }
-`;
+`
