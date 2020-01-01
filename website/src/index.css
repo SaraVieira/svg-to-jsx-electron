@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  font-family: CircularStd, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(
+    -270deg,
+    #9aadf6 0%,
+    #0c132c 0%,
+    #1c234a 100%
+  );
+  box-shadow: 0 15px 26px -11px rgba(0, 0, 0, 0.28);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

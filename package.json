@@ -20,7 +20,7 @@
     "start": "webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js --mode development",
     "build": "NODE_OPTIONS=\"--max-old-space-size=4096\" webpack --config webpack.build.config.js --mode production",
     "package": "npm run build",
-    "postpackage": "electron-packager ./ --out=./builds --overwrite --icon=./icons/mac/app.icns --ignore='.git(ignore|modules)' --osx-sign",
+    "postpackage": "electron-packager ./ --out=./builds --overwrite --icon=./icons/mac/app.icns --ignore='website' --osx-sign",
     "lint": "eslint src",
     "pretest": "npm run lint",
     "format": "prettier --write 'src/**/*.{js,css,md}'",
