@@ -4,6 +4,8 @@
 <img src="./images/app.png" />
 </p>
 
+[Website](https://svg-jsx.netlify.com/)
+
 [Download for Mac](https://github.com/SaraVieira/svg-to-jsx-electron/releases/download/v0.0.1/SVG.to.JSX.zip)
 
 IMPORTANT: To open please control+click and then click open
