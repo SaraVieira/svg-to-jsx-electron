@@ -10,7 +10,8 @@ function App() {
         <img src={logo} alt="logo" />
         <h1>SVG to JSX</h1>
         <h2>
-          Get in SVG files and you can get out SVG code ready for your React APP
+          Get in SVG files or code and you get out JSX code ready for your React
+          APP
         </h2>
         {navigator.platform === "MacIntel" ? (
           <h3>Please control+click to able to open</h3>
