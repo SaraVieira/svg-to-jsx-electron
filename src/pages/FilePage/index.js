@@ -1,54 +1,17 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
-
 import svgr from "@svgr/core";
-import Code from "../Code";
+import Code from "../../components/Code";
 import prettier from "prettier";
-import svgo from "../svgo";
+import svgo from "../../utils/svgo";
 import {
   unstable_FormCheckbox as FormCheckbox,
   unstable_useFormState as useFormState,
-  unstable_Form as Form,
   unstable_FormLabel as FormLabel,
   unstable_FormInput as FormInput
 } from "reakit/Form";
 
-const StyledForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-
-  textarea {
-    min-height: 200px;
-  }
-
-  textarea,
-  input {
-    color: white;
-    background: #444343;
-    border: none;
-    padding: 8px;
-    margin-bottom: 20px;
-  }
-`;
-
-const DropzoneContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border-radius: 2px;
-  background-color: #444343;
-  color: #bdbdbd;
-  outline: none;
-  transition: border 0.24s ease-in-out;
-`;
-
-const CodeWrapper = styled.div`
-  margin-top: 20px;
-`;
+import { StyledForm, DropzoneContainer, CodeWrapper } from "./elements";
 
 export default () => {
   const [jsCode, setJSCode] = useState([]);
