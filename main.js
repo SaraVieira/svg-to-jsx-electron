@@ -28,7 +28,9 @@ if (process.platform === "win32") {
 }
 
 function createWindow() {
-  app.dock.setIcon(path.join(__dirname, "icons/png/128x128.png"))
+  if (app.dock) {
+    app.dock.setIcon(path.join(__dirname, "icons/png/128x128.png"))
+  }
   // Create the browser window.
   mainWindow = new BrowserWindow({
     titleBarStyle: "hidden",
