@@ -1,0 +1,2 @@
+- Prettier Config
+- SVGO Config
