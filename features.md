@@ -1,2 +1,3 @@
 - Prettier Config
 - SVGO Config
+- Support SVG sprites: https://gist.github.com/ascorbic/c7ed769c52baee89374d1c53b8c867b2 || https://css-tricks.com/svg-symbol-good-choice-icons/
