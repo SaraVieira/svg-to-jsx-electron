@@ -1,21 +1,26 @@
 import { createHook } from "overmind-react"
 import { persistedState } from "./effects"
 import debounce from "lodash.debounce"
-import deepmerge from "deepmerge"
 import svgr from "@svgr/core"
 import svgo from "../utils/svgo"
 import prettier from "prettier"
 
+function deepMerge(target, source) {
+  Object.keys(source).forEach(key => {
+    const value = source[key]
+    if (typeof value === "object" && !Array.isArray(value) && value !== null) {
+      if (!target[key]) target[key] = {}
+      deepMerge(target[key], source[key])
+    } else {
+      target[key] = source[key]
+    }
+  })
+}
+
 const onInitialize = ({ state, effects: { persistedState } }, overmind) => {
   const initialState = persistedState.get()
 
-  deepmerge(state, initialState)
-
-  state.prettier = initialState.prettier
-  state.native = initialState.native
-  state.name = initialState.name
-  state.icon = initialState.icon
-  state.jsx = initialState.jsx
+  deepMerge(state, initialState)
 
   overmind.addFlushListener(() => {
     persistedState.set(state)
