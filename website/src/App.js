@@ -44,7 +44,7 @@ function App() {
         ) : null}
         {getOS() === "mac" ? (
           <a
-            href="https://github.com/SaraVieira/svg-to-jsx-electron/releases/download/v0.0.3/SVG.to.JSX-darwin-x64.zip"
+            href="https://github.com/SaraVieira/svg-to-jsx-electron/releases/download/v0.0.4/SVG.to.JSX-darwin-x64.zip"
             className="button"
           >
             Download
@@ -52,7 +52,7 @@ function App() {
         ) : null}
         {getOS() === "linux" ? (
           <a
-            href="https://github.com/SaraVieira/svg-to-jsx-electron/releases/download/v0.0.3/SVG.to.JSX-linux-x64.zip"
+            href="https://github.com/SaraVieira/svg-to-jsx-electron/releases/download/v0.0.4/4VG.to.JSX-linux-x64.zip"
             className="button"
           >
             Download
