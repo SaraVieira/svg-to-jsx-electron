@@ -4,35 +4,26 @@ import svgr from "@svgr/core"
 import Code from "../../components/Code"
 import prettier from "prettier"
 import svgo from "../../utils/svgo"
-import {
-  unstable_FormCheckbox as FormCheckbox,
-  unstable_useFormState as useFormState,
-  unstable_FormLabel as FormLabel,
-  unstable_FormInput as FormInput
-} from "reakit/Form"
+import { useOvermind } from "../../overmind"
 
 import { StyledForm, DropzoneContainer, CodeWrapper } from "./elements"
 
 export default () => {
+  const { state } = useOvermind()
+
   const [jsCode, setJSCode] = useState([])
   const [svgCode, setSVGCode] = useState([])
 
-  const onSubmit = async (values, code) => {
+  const onSubmit = async code => {
     code.map(async c => {
       const svgoCode = await svgo(c.svg)
-      const transformedCode = await svgr(svgoCode, values, {
-        componentName: values.name
+      const transformedCode = await svgr(svgoCode, state, {
+        componentName: state.name
       })
-      const prettierCode = prettier.format(transformedCode, {
-        parser: "babel"
-      })
+      const prettierCode = prettier.format(transformedCode, state.prettier)
       setJSCode(jsCode => jsCode.concat({ name: c.name, svg: prettierCode }))
     })
   }
-
-  const form = useFormState({
-    values: { native: false, name: "Icon", icon: false, jsx: false }
-  })
 
   function setupReader(file) {
     // eslint-disable-next-line
@@ -65,29 +56,13 @@ export default () => {
 
   useEffect(() => {
     if (svgCode.length === acceptedFiles.length) {
-      onSubmit(form.values, svgCode)
+      onSubmit(svgCode)
     }
   }, [svgCode])
 
   return (
     <>
-      <StyledForm {...form}>
-        <FormLabel {...form} name="name">
-          Component Name
-        </FormLabel>
-        <FormInput {...form} name="name" placeholder="Icon" />
-        <label>
-          <FormCheckbox {...form} name="icon" value="icon" /> Hide Dimensions
-        </label>
-        <label>
-          <FormCheckbox {...form} name="native" value="native" /> React Native
-        </label>
-        <label>
-          <FormCheckbox {...form} name="jsx" value="jsx" /> Use JSX extension
-        </label>
-        <FormLabel {...form} name="svgCode">
-          SVG File
-        </FormLabel>
+      <StyledForm>
         <DropzoneContainer {...getRootProps()}>
           <input {...getInputProps()} />
           {isDragActive ? (
@@ -105,11 +80,7 @@ export default () => {
         ? jsCode.map((code, i) => (
             <CodeWrapper key={i}>
               <label>{code.name}</label>
-              <Code
-                code={code.svg}
-                filename={code.name}
-                jsx={form.values.jsx}
-              />
+              <Code code={code.svg} filename={code.name} jsx={state.jsx} />
             </CodeWrapper>
           ))
         : null}

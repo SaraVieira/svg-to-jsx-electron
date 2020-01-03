@@ -1,85 +1,34 @@
-import React, { useState } from "react"
+import React from "react"
 
-import svgr from "@svgr/core"
 import Code from "../../components/Code"
-import prettier from "prettier"
-import svgo from "../../utils/svgo"
-import {
-  unstable_FormCheckbox as FormCheckbox,
-  unstable_useFormState as useFormState,
-  unstable_FormLabel as FormLabel,
-  unstable_FormInput as FormInput,
-  unstable_FormMessage as FormMessage
-} from "reakit/Form"
 import { StyledForm, Submit } from "./elements"
+import { useOvermind } from "../../overmind"
 
-export default () => {
-  const [jsCode, setJSCode] = useState()
-  const form = useFormState({
-    values: {
-      svgCode: "",
-      native: false,
-      name: "Icon",
-      icon: false,
-      jsx: false
-    },
-    onValidate: values => {
-      if (!values.svgCode) {
-        const errors = {
-          svgCode: "You need to paste some SVG code"
-        }
-        throw errors
-      }
-    },
-    onSubmit: async values => {
-      const svgoCode = await svgo(values.svgCode)
-      svgr(svgoCode, values, { componentName: values.name }).then(
-        async code => {
-          setJSCode(
-            prettier.format(code, {
-              parser: "babel"
-            })
-          )
-        }
-      )
-    }
-  })
+const CodePage = () => {
+  const { actions, state } = useOvermind()
   return (
     <>
-      <StyledForm {...form}>
-        <FormLabel {...form} name="name">
-          Component Name
-        </FormLabel>
-        <FormInput {...form} name="name" placeholder="Icon" />
-        <label>
-          <FormCheckbox {...form} name="icon" value="icon" /> Hide Dimensions
-        </label>
-        <label>
-          <FormCheckbox {...form} name="native" value="native" /> React Native
-        </label>
-        <label>
-          <FormCheckbox {...form} name="jsx" value="jsx" /> Use JSX extension
-          for saving
-        </label>
-        <FormLabel {...form} name="svgCode">
-          SVG Code
-        </FormLabel>
-        <FormInput
-          {...form}
-          name="svgCode"
+      <StyledForm
+        onSubmit={e => {
+          e.preventDefault()
+          actions.submitForm()
+        }}
+      >
+        <label htmlFor="svgCode">SVG Code</label>
+        <textarea
+          value={state.svgCode}
+          onChange={e => actions.setSvgCode(e.target.value)}
+          required
+          id="svgCode"
           placeholder="Please paste your svg code here"
-          as="textarea"
         />
-        <FormMessage {...form} name="svgCode" />
-        <Submit {...form}>Submit</Submit>
+        <Submit>Submit</Submit>
       </StyledForm>
-      {jsCode ? (
-        <Code
-          filename={form.values.name}
-          jsx={form.values.jsx}
-          code={jsCode}
-        ></Code>
+      {state.jsCode ? (
+        <Code filename={state.name} jsx={state.jsx} code={state.jsCode}></Code>
       ) : null}
     </>
   )
 }
+
+export default CodePage
