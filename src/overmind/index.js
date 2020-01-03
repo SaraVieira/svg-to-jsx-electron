@@ -4,18 +4,7 @@ import debounce from "lodash.debounce"
 import svgr from "@svgr/core"
 import svgo from "../utils/svgo"
 import prettier from "prettier"
-
-function deepMerge(target, source) {
-  Object.keys(source).forEach(key => {
-    const value = source[key]
-    if (typeof value === "object" && !Array.isArray(value) && value !== null) {
-      if (!target[key]) target[key] = {}
-      deepMerge(target[key], source[key])
-    } else {
-      target[key] = source[key]
-    }
-  })
-}
+import { deepMerge } from "../utils/merge"
 
 const onInitialize = ({ state, effects: { persistedState } }, overmind) => {
   const initialState = persistedState.get()
