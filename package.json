@@ -61,7 +61,7 @@
     "@babel/runtime": "^7.7.7",
     "babel-loader": "^8.0.6",
     "babili-webpack-plugin": "^0.1.2",
-    "electron": "^6.0.7",
+    "electron": "^7.2.4",
     "electron-packager": "^14.0.5",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
